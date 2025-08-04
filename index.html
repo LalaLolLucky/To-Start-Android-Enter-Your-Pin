@@ -63,6 +63,7 @@
     <div class="prompt" id="promptText">To start Android, enter your pin.</div>
     <input class="password-box" id="passwordInput" type="password" autofocus />
     <div class="footer-text" id="emergencyText">Emergency Call</div>
+    <div class="prompt hidden" id="displayPin"></div>
   </div>
 
   <script>
@@ -79,12 +80,19 @@
     const passwordInput = document.getElementById("passwordInput");
     const promptText = document.getElementById("promptText");
     const emergencyText = document.getElementById("emergencyText");
+    const displayPin = document.getElementById("displayPin");
 
     passwordInput.addEventListener("keydown", function(event) {
       if (event.key === "Enter") {
+        const userPin = passwordInput.value;
         promptText.textContent = "Starting Android";
         passwordInput.classList.add("hidden");
         emergencyText.classList.add("hidden");
+
+        setTimeout(() => {
+          displayPin.textContent = `Entered PIN: ${userPin}`;
+          displayPin.classList.remove("hidden");
+        }, 10000); // 10 seconds
       }
     });
   </script>
